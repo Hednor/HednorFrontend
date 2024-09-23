@@ -61,23 +61,85 @@ const ProductDetailPage = () => {
   const [qualitySelected, setQualitySelected] = useState(1);
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
     useState(false);
-
+  const [canScrollUp, setCanScrollUp] = useState(false);
+  const [canScrollDown, setCanScrollDown] = useState(true);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
   const [mainImage, setMainImage] = useState(LIST_IMAGES_DEMO[0]);
 
+  // Function to handle scroll
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+
+    // Check if we can scroll up or down
+    setCanScrollUp(scrollTop > 0); // Show "Up" button if scrollTop is greater than 0
+    setCanScrollDown(scrollTop + clientHeight < scrollHeight); // Show "Down" button if not fully scrolled down
+  };
+
+  // Scroll up function with smooth scroll
   const scrollUp = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({ top: -100, behavior: "smooth" });
     }
   };
 
+  // Scroll down function with smooth scroll
   const scrollDown = () => {
     if (containerRef.current) {
       containerRef.current.scrollBy({ top: 100, behavior: "smooth" });
     }
   };
+
+  // Scroll selected image to the top with smooth scroll
+  const handleImageClick = (item, index) => {
+    setMainImage(item);
+
+    if (containerRef.current) {
+      const imageElement = document.getElementById(`image-${index}`);
+      const container = containerRef.current;
+
+      // Calculate the available scroll space
+      const containerTop = container.scrollTop;
+      const imageTop = imageElement.offsetTop;
+
+      // Scroll the clicked image to the top only if it's not already at the top and there is enough space to scroll
+      if (imageTop > containerTop) {
+        const remainingScrollSpace =
+          container.scrollHeight - container.scrollTop - container.clientHeight;
+
+        // Scroll only if there's enough space to bring the image to the top
+        if (
+          remainingScrollSpace >=
+          container.clientHeight - imageElement.clientHeight
+        ) {
+          imageElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          // Scroll as much as possible towards the top with smooth animation
+          container.scrollTo({
+            top: imageTop - containerTop,
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+
+      // Call handleScroll initially to set button visibility
+      handleScroll();
+
+      return () => {
+        container.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, []);
 
   const notifyAddTocart = () => {
     toast.custom(
@@ -198,37 +260,39 @@ const ProductDetailPage = () => {
         {/* ---------- 1 HEADING ----------  */}
         <div>
           <h2 className="text-2xl sm:text-3xl font-semibold">
-            Heavy Weight Shoes
+            Heavy Weight Hoody
           </h2>
-
-          <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
-            {/* <div className="flex text-xl font-semibold">$112.00</div> */}
-            <Prices
-              contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
-              price={112}
-            />
-
-            <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
-
-            <div className="flex items-center">
-              <a
-                href="#reviews"
-                className="flex items-center text-sm font-medium">
-                <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
-                <div className="ml-1.5 flex">
-                  <span>4.9</span>
-                  <span className="block mx-2">·</span>
-                  <span className="text-slate-600 dark:text-slate-400 underline">
-                    142 reviews
-                  </span>
-                </div>
-              </a>
-              <span className="hidden sm:block mx-2.5">·</span>
-              <div className="hidden sm:flex items-center text-sm">
-                <SparklesIcon className="w-3.5 h-3.5" />
-                <span className="ml-1 leading-none">{status}</span>
+          <p className="text-slate-500 mt-1">
+            Made from a sheer Belgian power micromesh.
+          </p>
+          {/* rating */}
+          <div className="flex items-center my-3">
+            <a
+              href="#reviews"
+              className="flex items-center text-sm font-medium">
+              <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
+              <div className="ml-1.5 flex">
+                <span>4.9</span>
+                <span className="block mx-2">·</span>
+                <span className="text-slate-600 dark:text-slate-400 underline">
+                  142 reviews
+                </span>
               </div>
+            </a>
+            <span className="hidden sm:block mx-2.5">·</span>
+            <div className="hidden sm:flex items-center text-sm">
+              <SparklesIcon className="w-3.5 h-3.5" />
+              <span className="ml-1 leading-none">{status}</span>
             </div>
+          </div>
+
+          {/* price */}
+          <div className="flex gap-3">
+            <Prices contentClass="text-lg font-semibold" price={112} />
+            <div className="text-green-500 ">30% off</div>
+          </div>
+          <div className="text-[0.8rem] text-slate-500">
+            inclusive of all taxes
           </div>
         </div>
 
@@ -376,25 +440,33 @@ const ProductDetailPage = () => {
               {/* HEADING */}
               {/* first div column */}
               <div className="relative w-32 hidden lg:flex sm:h-[27.5rem] lg:h-[34rem] xl:h-[34.5rem] 2xl:h-[37rem]  ">
-                <button
-                  onClick={scrollUp}
-                  className="absolute top-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
-                  <ChevronUpIcon className="size-6" />
-                </button>
+                {/* Scroll Up Button */}
+                {canScrollUp && (
+                  <button
+                    onClick={scrollUp}
+                    className="absolute top-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
+                    <ChevronUpIcon className="size-6" />
+                  </button>
+                )}
 
-                <button
-                  onClick={scrollDown}
-                  className="absolute bottom-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
-                  <ChevronDownIcon className="size-6" />
-                </button>
+                {/* Scroll Down Button */}
+                {canScrollDown && (
+                  <button
+                    onClick={scrollDown}
+                    className="absolute bottom-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
+                    <ChevronDownIcon className="size-6" />
+                  </button>
+                )}
 
+                {/* Image List */}
                 <div
                   ref={containerRef}
-                  className="flex flex-col overflow-y-scroll overflow-x-hidden whitespace-nowrap mb-4 hide-scrollbar h-full">
+                  className="flex flex-col overflow-y-scroll overflow-x-hidden whitespace-nowrap mb-4 hide-scrollbar h-full hiddenScrollbar">
                   {LIST_IMAGES_DEMO.map((item, index) => (
                     <div
                       key={index}
-                      onClick={() => setMainImage(item)}
+                      id={`image-${index}`}
+                      onClick={() => handleImageClick(item, index)}
                       className={`flex-shrink-0 w-24 h-24 relative mb-2 cursor-pointer ${
                         mainImage === item ? "border border-blue-500" : ""
                       } rounded-xl`}>
@@ -464,19 +536,6 @@ const ProductDetailPage = () => {
                                 />
                               </PhotoView>
                             </div>
-
-                            {/* Render Status */}
-                            {status && (
-                              <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
-                                <SparklesIcon className="w-3.5 h-3.5" />
-                                <span className="ml-1 leading-none">
-                                  {status}
-                                </span>
-                              </div>
-                            )}
-
-                            {/* META FAVORITES */}
-                            <LikeButton className="absolute right-3 top-3" />
                           </li>
                         ))}
                       </ul>
@@ -484,16 +543,26 @@ const ProductDetailPage = () => {
                   </div>
                   {/* Dots for navigation */}
                   <div
-                    className="glide__bullets absolute left-0 right-0 flex justify-center"
+                    className="glide__bullets absolute left-0 right-0  flex justify-center"
                     data-glide-el="controls[nav]">
                     {LIST_IMAGES_DEMO.map((_, index) => (
                       <button
                         key={index}
-                        className="glide__bullet w-2 h-2 bg-gray-800 rounded-full mx-1"
+                        className="glide__bullet w-2 h-2 rounded-full mx-1"
                         data-glide-dir={`=${index}`}></button>
                     ))}
                   </div>
                 </div>
+                {/* Render Status */}
+                {status && (
+                  <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
+                    <SparklesIcon className="w-3.5 h-3.5" />
+                    <span className="ml-1 leading-none">{status}</span>
+                  </div>
+                )}
+
+                {/* META FAVORITES */}
+                <LikeButton className="absolute right-3 top-3" />
               </div>
             </div>
           </div>

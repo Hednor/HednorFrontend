@@ -122,7 +122,7 @@ export default function CartDropdown() {
                           Shipping and taxes calculated at checkout.
                         </span>
                       </span>
-                      <span className="">$299.00</span>
+                      <span className="">₹299.00</span>
                     </p>
                     <div className="flex space-x-2 mt-5">
                       <ButtonSecondary

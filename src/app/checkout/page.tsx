@@ -135,8 +135,7 @@ const CheckoutPage = () => {
                   <select
                     name="qty"
                     id="qty"
-                    className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
-                  >
+                    className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 ">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -165,8 +164,7 @@ const CheckoutPage = () => {
 
             <a
               href="##"
-              className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm "
-            >
+              className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm ">
               <span>Remove</span>
             </a>
           </div>
@@ -265,24 +263,24 @@ const CheckoutPage = () => {
               <div className="mt-4 flex justify-between py-2.5">
                 <span>Subtotal</span>
                 <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $249.00
+                  ₹249.00
                 </span>
               </div>
               <div className="flex justify-between py-2.5">
                 <span>Shipping estimate</span>
                 <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $5.00
+                  ₹5.00
                 </span>
               </div>
               <div className="flex justify-between py-2.5">
                 <span>Tax estimate</span>
                 <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $24.90
+                  ₹24.90
                 </span>
               </div>
               <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
                 <span>Order total</span>
-                <span>$276.00</span>
+                <span>₹276.00</span>
               </div>
             </div>
             <ButtonPrimary className="mt-8 w-full">Confirm order</ButtonPrimary>
@@ -291,8 +289,7 @@ const CheckoutPage = () => {
                 <svg
                   className="w-4 h-4 absolute -left-1 top-0.5"
                   viewBox="0 0 24 24"
-                  fill="none"
-                >
+                  fill="none">
                   <path
                     d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
                     stroke="currentColor"
@@ -320,8 +317,7 @@ const CheckoutPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="##"
-                  className="text-slate-900 dark:text-slate-200 underline font-medium"
-                >
+                  className="text-slate-900 dark:text-slate-200 underline font-medium">
                   Taxes
                 </a>
                 <span>
@@ -331,8 +327,7 @@ const CheckoutPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   href="##"
-                  className="text-slate-900 dark:text-slate-200 underline font-medium"
-                >
+                  className="text-slate-900 dark:text-slate-200 underline font-medium">
                   Shipping
                 </a>
                 {` `} infomation

@@ -12,12 +12,14 @@ const Prices: FC<PricesProps> = ({
   contentClass = "py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium",
 }) => {
   return (
-    <div className={`${className}`}>
+    <div className={`${className} `}>
       <div className={`flex items-center gap-2 ${contentClass}`}>
-        <span className="text-blue-600 font-semibold text-lg !leading-none">
+        <span className="text-black font-semibold text-2xl !leading-none">
           ₹{String(price)}
         </span>
-        <del className="text-gray-300 !leading-none">₹{String(price)}</del>
+        <del className="text-gray-500 !leading-none text-sm">
+          ₹{String(price)}
+        </del>
       </div>
     </div>
   );

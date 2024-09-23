@@ -371,131 +371,132 @@ const ProductDetailPage = () => {
       <main className="container mt-5 lg:mt-11">
         <div className="lg:flex">
           {/* CONTENT */}
-          <div className="w-full lg:w-[55%] flex items-stretch">
-            {/* HEADING */}
-            {/* first div column */}
-            <div className="relative w-32 hidden lg:flex h-[34rem]">
-              <button
-                onClick={scrollUp}
-                className="absolute top-0 right-1/2 transform translate-x-1/2 bg-blue-500 text-white p-1 rounded-full z-20">
-                <ChevronUpIcon className="size-6" />
-              </button>
+          <div className="w-full lg:w-[55%]">
+            <div className="flex sticky top-40 ">
+              {/* HEADING */}
+              {/* first div column */}
+              <div className="relative w-32 hidden lg:flex sm:h-[27.5rem] lg:h-[34rem] xl:h-[34.5rem] 2xl:h-[37rem]  ">
+                <button
+                  onClick={scrollUp}
+                  className="absolute top-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
+                  <ChevronUpIcon className="size-6" />
+                </button>
 
-              <button
-                onClick={scrollDown}
-                className="absolute bottom-0 right-1/2 transform translate-x-1/2 bg-blue-500 text-white p-1 rounded-full z-20">
-                <ChevronDownIcon className="size-6" />
-              </button>
+                <button
+                  onClick={scrollDown}
+                  className="absolute bottom-0 right-1/2 transform translate-x-1/2 bg-white text-black shadow-lg p-1 rounded-full z-20">
+                  <ChevronDownIcon className="size-6" />
+                </button>
 
-              <div
-                ref={containerRef}
-                className="flex flex-col overflow-y-scroll overflow-x-hidden whitespace-nowrap mb-4 hide-scrollbar h-full">
-                {LIST_IMAGES_DEMO.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => setMainImage(item)}
-                    className={`flex-shrink-0 w-24 h-24 relative mb-2 cursor-pointer ${
-                      mainImage === item ? "border border-blue-500" : ""
-                    } rounded-xl`}>
-                    <Image
-                      sizes="(max-width: 48px) 100vw, 30vw"
-                      fill
-                      src={item}
-                      className="w-full h-full rounded-xl object-cover overflow-hidden"
-                      alt={`product detail ${index}`}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* main image div */}
-            <div className="relative hidden sm:block w-full">
-              <PhotoProvider>
-                {/* Main Image  */}
-                <PhotoView src={mainImage.src}>
-                  <div className="aspect-w-16 aspect-h-16 relative cursor-pointer">
-                    <Image
-                      fill
-                      sizes="(max-width: 640px) 100vw, 33vw"
-                      src={mainImage}
-                      className="w-full rounded-2xl object-cover"
-                      alt="product detail"
-                    />
-                  </div>
-                </PhotoView>
-
-                {/* Provide All Images for the Gallery View */}
-                {LIST_IMAGES_DEMO.map((image, index) => (
-                  <PhotoView key={index} src={image.src} />
-                ))}
-              </PhotoProvider>
-              {/* Render Status */}
-              {status && (
-                <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
-                  <SparklesIcon className="w-3.5 h-3.5" />
-                  <span className="ml-1 leading-none">{status}</span>
-                </div>
-              )}
-              {/* META FAVORITES */}
-              <LikeButton className="absolute right-3 top-3 " />
-            </div>
-
-            {/* Mobile View */}
-            <div className="relative w-full sm:hidden">
-              <div className="glide" ref={glideRef}>
-                {/* Slider Container */}
-                <div className="glide__track" data-glide-el="track">
-                  <PhotoProvider>
-                    <ul className="glide__slides">
-                      {LIST_IMAGES_DEMO.map((image, index) => (
-                        <li key={index} className="glide__slide">
-                          <div className="aspect-w-16 aspect-h-16 relative">
-                            {/* PhotoView wraps the Image for gallery functionality */}
-
-                            <PhotoView src={image.src}>
-                              <Image
-                                fill
-                                sizes="(max-width: 640px) 100vw, 33vw"
-                                src={image.src}
-                                className="w-full rounded-2xl object-cover cursor-pointer"
-                                alt={`product image ${index + 1}`}
-                              />
-                            </PhotoView>
-                          </div>
-
-                          {/* Render Status */}
-                          {status && (
-                            <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
-                              <SparklesIcon className="w-3.5 h-3.5" />
-                              <span className="ml-1 leading-none">
-                                {status}
-                              </span>
-                            </div>
-                          )}
-
-                          {/* META FAVORITES */}
-                          <LikeButton className="absolute right-3 top-3" />
-                        </li>
-                      ))}
-                    </ul>
-                  </PhotoProvider>
-                </div>
-                {/* Dots for navigation */}
                 <div
-                  className="glide__bullets absolute left-0 right-0 flex justify-center"
-                  data-glide-el="controls[nav]">
-                  {LIST_IMAGES_DEMO.map((_, index) => (
-                    <button
+                  ref={containerRef}
+                  className="flex flex-col overflow-y-scroll overflow-x-hidden whitespace-nowrap mb-4 hide-scrollbar h-full">
+                  {LIST_IMAGES_DEMO.map((item, index) => (
+                    <div
                       key={index}
-                      className="glide__bullet w-2 h-2 bg-gray-800 rounded-full mx-1"
-                      data-glide-dir={`=${index}`}></button>
+                      onClick={() => setMainImage(item)}
+                      className={`flex-shrink-0 w-24 h-24 relative mb-2 cursor-pointer ${
+                        mainImage === item ? "border border-blue-500" : ""
+                      } rounded-xl`}>
+                      <Image
+                        sizes="(max-width: 48px) 100vw, 30vw"
+                        fill
+                        src={item}
+                        className="w-full h-full rounded-xl object-cover overflow-hidden"
+                        alt={`product detail ${index}`}
+                      />
+                    </div>
                   ))}
+                </div>
+              </div>
+
+              {/* main image div */}
+              <div className="relative hidden sm:block w-full">
+                <PhotoProvider>
+                  {/* Main Image  */}
+                  <PhotoView src={mainImage.src}>
+                    <div className="aspect-w-16 aspect-h-16 relative cursor-pointer">
+                      <Image
+                        fill
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                        src={mainImage}
+                        className="w-full rounded-2xl object-cover"
+                        alt="product detail"
+                      />
+                    </div>
+                  </PhotoView>
+
+                  {/* Provide All Images for the Gallery View */}
+                  {LIST_IMAGES_DEMO.map((image, index) => (
+                    <PhotoView key={index} src={image.src} />
+                  ))}
+                </PhotoProvider>
+                {/* Render Status */}
+                {status && (
+                  <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
+                    <SparklesIcon className="w-3.5 h-3.5" />
+                    <span className="ml-1 leading-none">{status}</span>
+                  </div>
+                )}
+                {/* META FAVORITES */}
+                <LikeButton className="absolute right-3 top-3 " />
+              </div>
+
+              {/* Mobile View */}
+              <div className="relative w-full sm:hidden">
+                <div className="glide" ref={glideRef}>
+                  {/* Slider Container */}
+                  <div className="glide__track" data-glide-el="track">
+                    <PhotoProvider>
+                      <ul className="glide__slides">
+                        {LIST_IMAGES_DEMO.map((image, index) => (
+                          <li key={index} className="glide__slide">
+                            <div className="aspect-w-16 aspect-h-16 relative">
+                              {/* PhotoView wraps the Image for gallery functionality */}
+
+                              <PhotoView src={image.src}>
+                                <Image
+                                  fill
+                                  sizes="(max-width: 640px) 100vw, 33vw"
+                                  src={image.src}
+                                  className="w-full rounded-2xl object-cover cursor-pointer"
+                                  alt={`product image ${index + 1}`}
+                                />
+                              </PhotoView>
+                            </div>
+
+                            {/* Render Status */}
+                            {status && (
+                              <div className="absolute top-3 left-3 px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 nc-shadow-lg rounded-full flex items-center justify-center text-slate-700 dark:text-slate-300">
+                                <SparklesIcon className="w-3.5 h-3.5" />
+                                <span className="ml-1 leading-none">
+                                  {status}
+                                </span>
+                              </div>
+                            )}
+
+                            {/* META FAVORITES */}
+                            <LikeButton className="absolute right-3 top-3" />
+                          </li>
+                        ))}
+                      </ul>
+                    </PhotoProvider>
+                  </div>
+                  {/* Dots for navigation */}
+                  <div
+                    className="glide__bullets absolute left-0 right-0 flex justify-center"
+                    data-glide-el="controls[nav]">
+                    {LIST_IMAGES_DEMO.map((_, index) => (
+                      <button
+                        key={index}
+                        className="glide__bullet w-2 h-2 bg-gray-800 rounded-full mx-1"
+                        data-glide-dir={`=${index}`}></button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
           {/* SIDEBAR */}
           <div className="w-full lg:w-[45%] pt-10 lg:pt-0 lg:pl-7 xl:pl-9 2xl:pl-10">
             {renderSectionContent()}

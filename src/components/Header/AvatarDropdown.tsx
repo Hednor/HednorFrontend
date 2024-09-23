@@ -21,14 +21,14 @@ export default function AvatarDropdown() {
               className={`rounded-full flex-col text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-16 sm:h-16 focus:outline-none flex items-center justify-center ${
                 isOpen && "text-blue-500"
               }`}>
-              <div className="h-2">
+              <div className="h-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-7">
+                  className="size-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -38,7 +38,7 @@ export default function AvatarDropdown() {
               </div>
 
               <br />
-              <p className="text-sm font-medium">Profile</p>
+              <p className="text-xs font-medium">Profile</p>
             </Popover.Button>
 
             <Transition

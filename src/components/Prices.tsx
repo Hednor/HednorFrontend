@@ -13,9 +13,11 @@ const Prices: FC<PricesProps> = ({
 }) => {
   return (
     <div className={`${className}`}>
-      <div
-        className={`flex items-center border border-blue-500 rounded-lg ${contentClass}`}>
-        <span className="text-blue-600 !leading-none">₹{String(price)}</span>
+      <div className={`flex items-center gap-2 ${contentClass}`}>
+        <span className="text-blue-600 font-semibold text-lg !leading-none">
+          ₹{String(price)}
+        </span>
+        <del className="text-gray-300 !leading-none">₹{String(price)}</del>
       </div>
     </div>
   );

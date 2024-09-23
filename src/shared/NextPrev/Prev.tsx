@@ -17,19 +17,16 @@ const Prev: FC<PrevProps> = ({
   return (
     <div
       className={`nc-Prev text-slate-500 dark:text-slate-400 ${className}`}
-      data-glide-el="controls"
-    >
+      data-glide-el="controls">
       <button
-        className={`${btnClassName} rounded-full flex items-center justify-center border-2 hover:border-slate-200 dark:hover:border-slate-600 border-transparent `}
+        className={`${btnClassName} bg-white border-2 shadow-md rounded-full flex items-center justify-center hover:border-slate-400 dark:hover:border-slate-600 border-transparent  `}
         onClick={onClickPrev}
         title="Prev"
-        data-glide-dir="<"
-      >
+        data-glide-dir="<">
         <svg
           className={`${svgSize} rtl:rotate-180`}
           viewBox="0 0 24 24"
-          fill="none"
-        >
+          fill="none">
           <path
             d="M9.57 5.92993L3.5 11.9999L9.57 18.0699"
             stroke="currentColor"

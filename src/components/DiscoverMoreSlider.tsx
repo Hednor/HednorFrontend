@@ -64,12 +64,12 @@ const DiscoverMoreSlider = () => {
       <div className="relative">
         <Prev
           className="absolute start-1 sm:-start-6 top-[40%] sm:top-1/2 sm:-translate-y-1/2 z-10 !text-slate-700"
-          btnClassName="w-12 h-12 hover:border-slate-400 dark:hover:border-slate-400 bg-white border shadow-md rounded-full"
+          btnClassName="w-12 h-12 hover:border-slate-400 dark:hover:border-slate-400"
           svgSize="w-6 h-6"
         />
         <Next
           className="absolute end-1 sm:-end-6 top-[40%] sm:top-1/2 sm:-translate-y-1/2 z-10 !text-slate-700"
-          btnClassName="w-12 h-12 hover:border-slate-500 dark:hover:border-slate-400 bg-white border shadow-md rounded-full"
+          btnClassName="w-12 h-12 hover:border-slate-500 dark:hover:border-slate-400"
           svgSize="w-6 h-6"
         />
 

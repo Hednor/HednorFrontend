@@ -74,14 +74,14 @@ export default function CartDropdown() {
               <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute sm:top-1.5 right-1 sm:right-3 rounded-full text-[10px] leading-none text-white font-medium">
                 <span className="mt-[1px]">3</span>
               </div>
-              <div className="h-2">
+              <div className="h-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="size-7">
+                  className="size-6">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -91,7 +91,7 @@ export default function CartDropdown() {
               </div>
             </div>
             <br />
-            <p className="text-sm font-medium">Cart</p>
+            <p className="text-xs font-medium">Cart</p>
 
             <Link className="block md:hidden absolute inset-0" href={"/cart"} />
           </Popover.Button>

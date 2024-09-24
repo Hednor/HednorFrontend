@@ -110,15 +110,15 @@ const TabFilters = () => {
           <>
             <Popover.Button
               className={`flex items-center justify-center px-4 py-2 text-sm border rounded-full focus:outline-none select-none
-              ${open ? "!border-primary-500 " : ""}
+              ${open ? "!border-slate-500 " : ""}
                 ${
                   !!sortOrderStates.length
-                    ? "!border-primary-500 bg-primary-50 text-primary-900"
+                    ? "!border-slate-500 bg-neutral-50 text-primary-900"
                     : "border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-neutral-400 dark:hover:border-neutral-500"
                 }
                 `}>
               <svg
-                className="w-8 lg:w-4 h-8 lg:h-4"
+                className=" hidden lg:block w-8 lg:w-4 h-8 lg:h-4"
                 viewBox="0 0 20 20"
                 fill="none">
                 <path
@@ -240,11 +240,11 @@ const TabFilters = () => {
     return (
       <div className="flex-shrink-0">
         <div
-          className={`flex flex-shrink-0 items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-900 focus:outline-none cursor-pointer select-none`}
+          className={`flex flex-shrink-0 items-center justify-center px-4 py-2 text-sm rounded-full border border-slate-500 bg-slate-50 text-primary-900 focus:outline-none cursor-pointer select-none`}
           onClick={openModalMoreFilter}>
-          <AdjustmentsHorizontalIcon className="size-8 lg:size-4" />
+          <AdjustmentsHorizontalIcon className="size-8 lg:size-4 hidden lg:block" />
 
-          <span className="ml-2">Products filters (3)</span>
+          <span className="ml-2">Products filters </span>
         </div>
 
         <Transition appear show={isOpenMoreFilter} as={Fragment}>

@@ -152,7 +152,7 @@ const ProductCard: FC<ProductCardProps> = ({
         className={`nc-ProductCard relative flex flex-col bg-transparent ${className}`}>
         <Link href={"/product-detail"} className="absolute inset-0"></Link>
 
-        <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
+        <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-xl lg:rounded-3xl overflow-hidden z-1 group">
           <Link href={"/product-detail"} className="block">
             <NcImage
               containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0"
@@ -168,18 +168,19 @@ const ProductCard: FC<ProductCardProps> = ({
           {renderGroupButtons()}
         </div>
 
-        <div className="space-y-4 px-2.5 pt-5 pb-2.5">
+        <div className="space-y-2 lg:space-y-4 px-2.5 pt-2.5 lg:pt-5 pb-2.5">
           {/* {renderVariants()} */}
           <div>
-            <h2 className="nc-ProductCard__title text-base font-semibold transition-colors">
+            <h2 className="nc-ProductCard__title text-sm lg:text-base font-semibold transition-colors">
               {name}
             </h2>
-            <p className={`text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
+            <p
+              className={`text-xs	lg:text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
               {description}
             </p>
           </div>
 
-          <div className="flex justify-between items-end ">
+          <div className="flex justify-between items-end flex-wrap ">
             <Prices price={price} />
             <div className="flex items-center mb-0.5">
               <StarIcon className="w-5 h-5 pb-[1px] text-amber-400" />

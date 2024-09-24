@@ -170,8 +170,7 @@ const SidebarFilters = () => {
           <div>
             <label
               htmlFor="minPrice"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-            >
+              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Min price
             </label>
             <div className="mt-1 relative rounded-md">
@@ -191,8 +190,7 @@ const SidebarFilters = () => {
           <div>
             <label
               htmlFor="maxPrice"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-            >
+              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Max price
             </label>
             <div className="mt-1 relative rounded-md">

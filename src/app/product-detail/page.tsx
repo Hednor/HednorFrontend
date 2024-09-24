@@ -63,7 +63,7 @@ const ProductDetailPage = () => {
     useState(false);
   const [canScrollUp, setCanScrollUp] = useState(false);
   const [canScrollDown, setCanScrollDown] = useState(true);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef(null);
 
   const [mainImage, setMainImage] = useState(LIST_IMAGES_DEMO[0]);
@@ -94,35 +94,42 @@ const ProductDetailPage = () => {
   };
 
   // Scroll selected image to the top with smooth scroll
-  const handleImageClick = (item, index) => {
+  const handleImageClick = (item: any, index: any): void => {
     setMainImage(item);
 
     if (containerRef.current) {
       const imageElement = document.getElementById(`image-${index}`);
       const container = containerRef.current;
 
-      // Calculate the available scroll space
-      const containerTop = container.scrollTop;
-      const imageTop = imageElement.offsetTop;
+      // Ensure imageElement is not null before proceeding
+      if (imageElement) {
+        // Calculate the available scroll space
+        const containerTop = container.scrollTop;
+        const imageTop = imageElement.offsetTop;
 
-      // Scroll the clicked image to the top only if it's not already at the top and there is enough space to scroll
-      if (imageTop > containerTop) {
-        const remainingScrollSpace =
-          container.scrollHeight - container.scrollTop - container.clientHeight;
+        // Scroll the clicked image to the top only if it's not already at the top and there is enough space to scroll
+        if (imageTop > containerTop) {
+          const remainingScrollSpace =
+            container.scrollHeight -
+            container.scrollTop -
+            container.clientHeight;
 
-        // Scroll only if there's enough space to bring the image to the top
-        if (
-          remainingScrollSpace >=
-          container.clientHeight - imageElement.clientHeight
-        ) {
-          imageElement.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else {
-          // Scroll as much as possible towards the top with smooth animation
-          container.scrollTo({
-            top: imageTop - containerTop,
-            behavior: "smooth",
-          });
+          // Scroll only if there's enough space to bring the image to the top
+          if (
+            remainingScrollSpace >=
+            container.clientHeight - imageElement.clientHeight
+          ) {
+            imageElement.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            // Scroll as much as possible towards the top with smooth animation
+            container.scrollTo({
+              top: imageTop - containerTop,
+              behavior: "smooth",
+            });
+          }
         }
+      } else {
+        console.warn(`Image element with ID "image-${index}" not found.`);
       }
     }
   };
@@ -421,7 +428,6 @@ const ProductDetailPage = () => {
         type: "carousel",
         perView: 1,
         gap: 20,
-        // autoplay: 3000,
         dots: true,
       });
 

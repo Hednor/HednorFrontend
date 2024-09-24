@@ -21,7 +21,7 @@ export const MEGAMENU_TEMPLATES: NavItemType[] = [
     name: "Shop Pages",
     children: [
       { id: ncNanoId(), href: "/collection", name: "Category Page 1" },
-      { id: ncNanoId(), href: "/collection-2", name: "Category Page 2" },
+      { id: ncNanoId(), href: "/collection", name: "Category Page 2" },
       { id: ncNanoId(), href: "/product-detail", name: "Product Page 1" },
       { id: ncNanoId(), href: "/product-detail-2", name: "Product Page 2" },
       { id: ncNanoId(), href: "/cart", name: "Cart Page" },
@@ -207,7 +207,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
       },
       {
         id: ncNanoId(),
-        href: "/collection-2",
+        href: "/collection",
         name: "Category page 2",
       },
     ],
@@ -333,7 +333,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/collection-2",
+    href: "/collection",
     name: "Women",
     type: "megaMenu",
     children: MEGAMENU_WOMENS,
@@ -347,7 +347,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
 
   {
     id: ncNanoId(),
-    href: "/collection-2",
+    href: "/collection",
     name: "Sport",
   },
   {

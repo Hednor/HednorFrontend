@@ -474,7 +474,7 @@ const ProductDetailPage = () => {
                       id={`image-${index}`}
                       onClick={() => handleImageClick(item, index)}
                       className={`flex-shrink-0 w-24 h-24 relative mb-2 cursor-pointer ${
-                        mainImage === item ? "border border-blue-500" : ""
+                        mainImage === item ? "border-2 border-primary-500" : ""
                       } rounded-xl`}>
                       <Image
                         sizes="(max-width: 48px) 100vw, 30vw"

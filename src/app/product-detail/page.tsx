@@ -428,7 +428,7 @@ const ProductDetailPage = () => {
         type: "carousel",
         perView: 1,
         gap: 20,
-        dots: true,
+        // dots: true,
       });
 
       glide.mount();

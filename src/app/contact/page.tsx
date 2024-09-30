@@ -10,15 +10,15 @@ import SectionPromo1 from "@/components/SectionPromo1";
 const info = [
   {
     title: "🗺 ADDRESS",
-    desc: "Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter",
+    desc: "H-150, Sector-63 Noida,Gautam Budh Nagar, 201301",
   },
   {
     title: "💌 EMAIL",
-    desc: "nc.example@example.com",
+    desc: "support@ramaera.com",
   },
   {
     title: "☎ PHONE",
-    desc: "000-123-456-7890",
+    desc: "0120-4152818",
   },
 ];
 

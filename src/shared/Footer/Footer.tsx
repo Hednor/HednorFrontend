@@ -2,6 +2,9 @@ import Logo from "@/shared/Logo/Logo";
 import SocialsList1 from "@/shared/SocialsList1/SocialsList1";
 import { CustomLink } from "@/data/types";
 import React from "react";
+import logoImg from "@/images/HednorLogoLight.png";
+import Image from "next/image";
+import Link from "next/link";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -12,32 +15,32 @@ export interface WidgetFooterMenu {
 const widgetMenus: WidgetFooterMenu[] = [
   {
     id: "5",
-    title: "Getting started",
+    title: "Company",
     menus: [
-      { href: "/", label: "Release Notes" },
-      { href: "/", label: "Upgrade Guide" },
-      { href: "/", label: "Browser Support" },
-      { href: "/", label: "Dark Mode" },
+      { href: "/about", label: "About Us" },
+      { href: "/contact", label: "Contact Us" },
+      { href: "/subscription", label: "Subscription" },
+      { href: "/blog", label: "Blog" },
     ],
   },
   {
     id: "1",
     title: "Explore",
     menus: [
-      { href: "/", label: "Prototyping" },
-      { href: "/", label: "Design systems" },
+      { href: "/collection", label: "Collection" },
+      { href: "/search", label: "Search" },
       { href: "/", label: "Pricing" },
       { href: "/", label: "Security" },
     ],
   },
   {
     id: "2",
-    title: "Resources",
+    title: "Policies",
     menus: [
-      { href: "/", label: "Best practices" },
-      { href: "/", label: "Support" },
-      { href: "/", label: "Developers" },
-      { href: "/", label: "Learn design" },
+      { href: "/", label: "Privacy Policy" },
+      { href: "/", label: "Terms & Conditions" },
+      { href: "/", label: "Shipping Information" },
+      { href: "/", label: "Returns & Refunds Policy" },
     ],
   },
   {
@@ -56,20 +59,17 @@ const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
-        <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">
-          {menu.title}
-        </h2>
+        <h2 className="font-semibold text-neutral-200">{menu.title}</h2>
         <ul className="mt-5 space-y-4">
           {menu.menus.map((item, index) => (
             <li key={index}>
-              <a
+              <Link
                 key={index}
-                className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                className="text-neutral-400  hover:text-white"
                 href={item.href}
-                target="_blank"
                 rel="noopener noreferrer">
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -78,17 +78,30 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <div className="nc-Footer relative py-20 lg:pt-28 lg:pb-24 border-t border-neutral-200 dark:border-neutral-700">
+    <div className="nc-Footer relative pt-20 border-t border-neutral-200 dark:border-neutral-700 bg-black">
       <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
         <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
           <div className="col-span-2 md:col-span-1">
-            <Logo />
+            {/* <Logo /> */}
+            <Image
+              className={`block h-12 sm:h-20 w-auto 
+          }`}
+              src={logoImg}
+              alt="Logo"
+              sizes="100px"
+              priority
+            />
           </div>
           <div className="col-span-2 flex items-center md:col-span-3">
-            <SocialsList1 className="flex items-center space-x-2 lg:space-x-0 lg:flex-col lg:space-y-3 lg:items-start" />
+            <SocialsList1 className="flex w-full space-x-6 " />
           </div>
         </div>
         {widgetMenus.map(renderWidgetMenuItem)}
+      </div>
+      <div className="border-t mt-10 py-4 border-slate-600">
+        <h5 className="text-center text-slate-300">
+          © 2024 Hednor . All Rights Reserved.
+        </h5>
       </div>
     </div>
   );

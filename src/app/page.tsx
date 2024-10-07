@@ -24,7 +24,7 @@ function PageHome() {
       <SectionHero2 />
       <Discount />
 
-      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
+      <div className="container relative space-y-24 my-16 sm:my-24 lg:space-y-32 lg:my-32">
         <DiscoverMoreSlider />
 
         <SectionSliderProductCard

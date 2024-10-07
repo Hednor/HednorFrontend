@@ -216,7 +216,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
           {item.name}
           {item.type && (
             <ChevronDownIcon
-              className="ml-1 -mr-1 h-4 w-4 text-slate-400"
+              className="ml-1 -mr-1 h-4 w-4 text-slate-600"
               aria-hidden="true"
             />
           )}

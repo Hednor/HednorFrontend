@@ -6,9 +6,24 @@ import { Fragment, useState } from "react";
 import Avatar from "@/shared/Avatar/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode/SwitchDarkMode2";
 import Link from "next/link";
+import getCurrentUser from "@/utils/api/user";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/state/slice/authSlice";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function AvatarDropdown() {
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
+  const { data, isLoading } = getCurrentUser();
+  // const token = useSelector((state: any) => state.auth.token);
+  // console.log("usessr", token, data)
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = '/';
+  };
+
   return (
     <div className="AvatarDropdown ">
       <Popover className="relative">
@@ -18,9 +33,8 @@ export default function AvatarDropdown() {
               onClick={() => setIsOpen(!open)}
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
-              className={`rounded-full flex-col text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-16 sm:h-16 focus:outline-none flex items-center justify-center ${
-                isOpen && "text-blue-500"
-              }`}>
+              className={`rounded-full flex-col text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-16 sm:h-16 focus:outline-none flex items-center justify-center ${isOpen && "text-blue-500"
+                }`}>
               <div className="h-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +85,7 @@ export default function AvatarDropdown() {
                       </svg>
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Owais S</h4>
+                        <h4 className="font-semibold">{data?.displayName}</h4>
                         <p className="text-xs mt-0.5">New Delhi, India</p>
                       </div>
                     </div>
@@ -325,7 +339,7 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Log out"}</p>
+                        <button onClick={handleLogout} className="text-sm font-medium ">{"Log out"}</button>
                       </div>
                     </Link>
                   </div>

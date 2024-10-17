@@ -1,15 +1,18 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "@/shared/Input/Input";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tokenStore } from "@/state/slice/authSlice";
 import { loginAuth } from "@/utils/api/auth";
+import { useRouter } from "next/navigation";
 
 const PageLogin: React.FC = () => {
+  const router = useRouter()
   const dispatch = useDispatch();
+  const token = useSelector((state: any) => state.auth.token);
   const [loading, setLoading] = useState<boolean>(false);
 
   const mutation = useMutation({
@@ -17,7 +20,7 @@ const PageLogin: React.FC = () => {
     onSuccess: (data) => {
       console.log('Login success:', data.access_token);
       dispatch(tokenStore({ token: data.access_token }));
-      alert("Login successful!");
+      router.push("/account");
       setLoading(false);
     },
     onError: (error: Error) => {
@@ -37,6 +40,12 @@ const PageLogin: React.FC = () => {
       password: formData.get('password') as string,
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    }
+  }, [router, token])
 
   return (
     <div className={`nc-PageLogin`} data-nc-id="PageLogin">

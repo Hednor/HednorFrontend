@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { tokenStore } from "@/state/slice/authSlice";
 import { loginAuth } from "@/utils/api/auth";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
 const PageLogin: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state: any) => state.auth.token);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isCheckingToken, setIsCheckingToken] = useState<boolean>(true);
 
   const mutation = useMutation({
     mutationFn: loginAuth,
@@ -27,7 +29,6 @@ const PageLogin: React.FC = () => {
       console.error('Login failed', error);
       alert(error.message);
       setLoading(false);
-      console.error('Login failed', error);
     },
   });
 
@@ -44,8 +45,14 @@ const PageLogin: React.FC = () => {
   useEffect(() => {
     if (token) {
       router.push("/");
+    } else {
+      setIsCheckingToken(false);
     }
-  }, [router, token])
+  }, [router, token]);
+
+  if (isCheckingToken) {
+    return <div><Loader /></div>;
+  }
 
   return (
     <div className={`nc-PageLogin`} data-nc-id="PageLogin">

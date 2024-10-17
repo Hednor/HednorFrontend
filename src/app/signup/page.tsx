@@ -9,6 +9,7 @@ import { signupAuth } from "@/utils/api/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { tokenStore } from "@/state/slice/authSlice";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
 const PageSignUp = () => {
   const router = useRouter()
@@ -21,6 +22,7 @@ const PageSignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isCheckingToken, setIsCheckingToken] = useState<boolean>(true);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -52,8 +54,14 @@ const PageSignUp = () => {
   useEffect(() => {
     if (token) {
       router.push("/");
+    } else {
+      setIsCheckingToken(false);
     }
-  }, [router, token])
+  }, [router, token]);
+
+  if (isCheckingToken) {
+    return <div><Loader /></div>;
+  }
 
   return (
     <div className={`nc-PageSignUp`} data-nc-id="PageSignUp">

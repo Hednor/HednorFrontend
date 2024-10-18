@@ -8,6 +8,7 @@ import ProductCard from "./ProductCard";
 import { Product, PRODUCTS } from "@/data/data";
 import Prev from "@/shared/NextPrev/Prev";
 import Next from "@/shared/NextPrev/Next";
+import useGetAllProducts from "@/hooks/useGetAllProducts";
 
 export interface SectionSliderProductCardProps {
   className?: string;
@@ -71,6 +72,8 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
     };
   }, [sliderRef]);
 
+  // const { data: products } = useGetAllProducts()
+  // console.log("products", products)
   return (
     <div className={`nc-SectionSliderProductCard ${className}`}>
       <div ref={sliderRef} className={`flow-root ${isShow ? "" : "invisible"}`}>

@@ -186,12 +186,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Home Demo 1",
-  },
-  {
-    id: ncNanoId(),
-    href: "/home-2",
-    name: "Home Demo 2",
+    name: "Home",
   },
   {
     id: ncNanoId(),
@@ -344,13 +339,13 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     href: "/collection",
     name: "Sport",
   },
-  {
-    id: ncNanoId(),
-    href: "/collection",
-    name: "Templates",
-    type: "megaMenu",
-    children: MEGAMENU_TEMPLATES,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/collection",
+  //   name: "Templates",
+  //   type: "megaMenu",
+  //   children: MEGAMENU_TEMPLATES,
+  // },
   {
     id: ncNanoId(),
     href: "/search",

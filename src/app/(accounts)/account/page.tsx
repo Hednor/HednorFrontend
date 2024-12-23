@@ -1,3 +1,4 @@
+"use client"
 import Label from "@/components/Label/Label";
 import React, { FC } from "react";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
@@ -6,8 +7,10 @@ import Select from "@/shared/Select/Select";
 import Textarea from "@/shared/Textarea/Textarea";
 import { avatarImgs } from "@/contains/fakeData";
 import Image from "next/image";
+import getCurrentUser from "@/utils/api/user";
 
 const AccountPage = () => {
+  const { data, isLoading } = getCurrentUser();
   return (
     <div className={`nc-AccountPage `}>
       <div className="space-y-10 sm:space-y-12">
@@ -53,7 +56,7 @@ const AccountPage = () => {
           <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
             <div>
               <Label>Full name</Label>
-              <Input className="mt-1.5" defaultValue="Owais" />
+              <Input className="mt-1.5" defaultValue={data?.displayName} />
             </div>
 
             {/* ---- */}
@@ -67,7 +70,7 @@ const AccountPage = () => {
                 </span>
                 <Input
                   className="!rounded-l-none"
-                  placeholder="example@email.com"
+                  placeholder={data?.email}
                 />
               </div>
             </div>

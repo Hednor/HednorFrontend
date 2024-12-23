@@ -1,90 +1,157 @@
-import React, { FC } from "react";
-import facebookSvg from "@/images/Facebook.svg";
-import twitterSvg from "@/images/Twitter.svg";
-import googleSvg from "@/images/Google.svg";
+"use client";
+import React, { useEffect, useState } from "react";
 import Input from "@/shared/Input/Input";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
-import Image from "next/image";
 import Link from "next/link";
-
-const loginSocials = [
-  {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
-    name: "Continue with Google",
-    href: "#",
-    icon: googleSvg,
-  },
-];
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { useMutation } from "@tanstack/react-query";
+import { signupAuth } from "@/utils/api/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { tokenStore } from "@/state/slice/authSlice";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
 const PageSignUp = () => {
+  const router = useRouter()
+  const token = useSelector((state: any) => state.auth.token);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isCheckingToken, setIsCheckingToken] = useState<boolean>(true);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
+  const mutation = useMutation({
+    mutationFn: signupAuth,
+    onSuccess: (data) => {
+      dispatch(tokenStore({ token: data.access_token }));
+      alert("Signup successful!");
+      setLoading(false);
+    },
+    onError: (error: Error) => {
+      alert(error.message);
+      setLoading(false);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    mutation.mutate({
+      name: name,
+      email: email,
+      password: password,
+    });
+  };
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    } else {
+      setIsCheckingToken(false);
+    }
+  }, [router, token]);
+
+  if (isCheckingToken) {
+    return <div><Loader /></div>;
+  }
+
   return (
-    <div className={`nc-PageSignUp `} data-nc-id="PageSignUp">
-      <div className="container mb-24 lg:mb-32">
-        <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
+    <div className={`nc-PageSignUp`} data-nc-id="PageSignUp">
+      <div className="container max-w-md p-10 my-10 lg:my-10 rounded-3xl sm:border-2 sm:border-primary-500">
+        <h2 className="mb-8 flex items-center text-3xl leading-[115%] md:text-4xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           Signup
         </h2>
-        <div className="max-w-md mx-auto space-y-6 ">
-          <div className="grid gap-3">
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className=" flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
-              >
-                <Image
-                  sizes="40px"
-                  className="flex-shrink-0"
-                  src={item.icon}
-                  alt={item.name}
-                />
-                <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
-                  {item.name}
-                </h3>
-              </a>
-            ))}
-          </div>
-          {/* OR */}
-          <div className="relative text-center">
-            <span className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900">
-              OR
-            </span>
-            <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
-          </div>
+        <div className="mx-auto space-y-6">
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <form className="grid grid-cols-1 gap-5" onSubmit={handleSubmit}>
             <label className="block">
-              <span className="text-neutral-800 dark:text-neutral-200">
-                Email address
-              </span>
+              <span className="text-neutral-800 dark:text-neutral-200">Name</span>
               <Input
-                type="email"
-                placeholder="example@example.com"
+                type="text"
+                placeholder="Name"
                 className="mt-1"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </label>
+
             <label className="block">
+              <span className="text-neutral-800 dark:text-neutral-200">Email</span>
+              <Input
+                type="email"
+                placeholder="Email Id"
+                className="mt-1"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
+
+            <label className="block relative">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
               </span>
-              <Input type="password" className="mt-1" />
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="mt-1"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-10 text-gray-500"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+              </button>
             </label>
-            <ButtonPrimary type="submit">Continue</ButtonPrimary>
+
+            <label className="block relative">
+              <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
+                Confirm Password
+              </span>
+              <Input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className="mt-1"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-10 text-gray-500"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+              </button>
+
+              {password !== confirmPassword && confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">Password doesn't match</p>
+              )}
+            </label>
+
+            <ButtonPrimary type="submit" disabled={loading || password !== confirmPassword}>
+              {loading ? "Signing up..." : "Continue"}
+            </ButtonPrimary>
           </form>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
-            Already have an account? {` `}
-            <Link className="text-green-600" href="/login">
-              Sign in
+            Already have an account?{" "}
+            <Link className="text-primary-500" href="/login">
+              Login
             </Link>
           </span>
         </div>

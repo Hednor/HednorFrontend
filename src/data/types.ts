@@ -15,5 +15,3 @@ export type TwMainColor =
   | "blue"
   | "purple"
   | "gray";
-
-//

@@ -1,92 +1,102 @@
-import React, { FC } from "react";
-import facebookSvg from "@/images/Facebook.svg";
-import twitterSvg from "@/images/Twitter.svg";
-import googleSvg from "@/images/Google.svg";
+'use client';
+import React, { useEffect, useState } from "react";
 import Input from "@/shared/Input/Input";
 import ButtonPrimary from "@/shared/Button/ButtonPrimary";
-import Image from "next/image";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { tokenStore } from "@/state/slice/authSlice";
+import { loginAuth } from "@/utils/api/auth";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
-const loginSocials = [
-  {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
-    name: "Continue with Google",
-    href: "#",
-    icon: googleSvg,
-  },
-];
+const PageLogin: React.FC = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const token = useSelector((state: any) => state.auth.token);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isCheckingToken, setIsCheckingToken] = useState<boolean>(true);
 
-const PageLogin = () => {
+  const mutation = useMutation({
+    mutationFn: loginAuth,
+    onSuccess: (data) => {
+      console.log('Login success:', data.access_token);
+      dispatch(tokenStore({ token: data.access_token }));
+      router.push("/account");
+      setLoading(false);
+    },
+    onError: (error: Error) => {
+      console.error('Login failed', error);
+      alert(error.message);
+      setLoading(false);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    mutation.mutate({
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    });
+  };
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    } else {
+      setIsCheckingToken(false);
+    }
+  }, [router, token]);
+
+  if (isCheckingToken) {
+    return <div><Loader /></div>;
+  }
+
   return (
     <div className={`nc-PageLogin`} data-nc-id="PageLogin">
-      <div className="container mb-24 lg:mb-32">
-        <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
+      <div className="container max-w-md p-10 my-10 lg:my-10 rounded-3xl sm:border-2 sm:border-primary-500">
+        <h2 className="mb-10 flex items-center text-3xl leading-[115%] md:text-4xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           Login
         </h2>
-        <div className="max-w-md mx-auto space-y-6">
-          <div className="grid gap-3">
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
-              >
-                <Image
-                  className="flex-shrink-0"
-                  src={item.icon}
-                  alt={item.name}
-                  sizes="40px"
-                />
-                <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
-                  {item.name}
-                </h3>
-              </a>
-            ))}
-          </div>
-          {/* OR */}
-          <div className="relative text-center">
-            <span className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900">
-              OR
-            </span>
-            <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
-          </div>
+        <div className="mx-auto space-y-6">
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
             <label className="block">
-              <span className="text-neutral-800 dark:text-neutral-200">
-                Email address
-              </span>
+              <span className="text-neutral-800 dark:text-neutral-200">Email address</span>
               <Input
                 type="email"
-                placeholder="example@example.com"
+                name="email"
+                required
+                placeholder="Enter your email"
                 className="mt-1"
               />
             </label>
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
-                <Link href="/forgot-pass" className="text-sm text-green-600">
+                <Link href="/forgot-password" className="text-sm text-primary-500">
                   Forgot password?
                 </Link>
               </span>
-              <Input type="password" className="mt-1" />
+              <Input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+                className="mt-1"
+              />
             </label>
-            <ButtonPrimary type="submit">Continue</ButtonPrimary>
+            <ButtonPrimary type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Continue"}
+            </ButtonPrimary>
           </form>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
-            New user? {` `}
-            <Link className="text-green-600" href="/signup">
+            New user?{" "}
+            <Link className="text-primary-500" href="/signup">
               Create an account
             </Link>
           </span>

@@ -358,10 +358,16 @@ export default function AvatarDropdown() {
           </Popover>
         </div>
         :
-        <button className="relative mt-3 sm:mt-0  flex rounded-sm bg-primary-500">
-          <Link href="/login" className={`flex items-center text-center font-semibold h-10 sm:h-12 px-2 sm:px-3 }`}><p>Login</p>
-          </Link>
-        </button>
+        // <button className="relative mt-3 sm:mt-0  flex rounded-sm bg-primary-500">
+        //   <Link href="/login" className={`flex items-center text-center font-semibold h-10 sm:h-12 px-2 sm:px-3 }`}><p>Login</p>
+        //   </Link>
+        // </button>
+        <button className="relative mt-3 sm:mt-0 flex rounded-md bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 transition duration-300 ease-in-out">
+  <Link href="/login" className="flex items-center justify-center text-center font-semibold text-white h-10 sm:h-12 px-2 sm:px-4 rounded-md transform hover:scale-105 active:scale-100">
+    Login
+  </Link>
+</button>
+
       }
     </>
   );

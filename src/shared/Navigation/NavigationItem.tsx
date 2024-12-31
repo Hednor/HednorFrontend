@@ -4,7 +4,7 @@ import { Popover, Transition } from "@/app/headlessui";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import CardCategory3 from "@/components/CardCategories/CardCategory3";
 import NavPoster from "./NavPoster";
-import React, { FC, Fragment, useState } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import { Route } from "@/routers/types";
 import Link from "next/link";
 
@@ -25,6 +25,11 @@ export interface NavigationItemProps {
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const onMouseEnterMenu = (id: string) => {
     setMenuCurrentHovers((state) => [...state, id]);
@@ -44,7 +49,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
       return null;
     }
     return (
-      <li
+      <div
         className={`menu-item flex-shrink-0 menu-megamenu menu-megamenu--large`}>
         {renderMainItem(menu)}
 
@@ -55,7 +60,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
                 <div className="flex-1 grid grid-cols-4 gap-6 xl:gap-8 pr-6 xl:pr-8">
                   {menu.children.map((item, index) => (
                     <div key={index}>
-                      <p className="font-medium text-slate-900 dark:text-neutral-200">
+                      <p className="font-semibold text-md text-slate-900 dark:text-neutral-200">
                         {item.name}
                       </p>
                       <ul className="grid space-y-4 mt-4">
@@ -74,7 +79,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
             </div>
           </div>
         </div>
-      </li>
+      </div>
     );
   };
 
@@ -209,21 +214,20 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
     return (
       <div className="h-12 flex-shrink-0 flex items-center">
         <Link
-          className="inline-flex items-center text-sm lg:text-[15px] font-medium text-slate-800 dark:text-slate-300 py-2.5 px-4 xl:px-5 rounded-full hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+          className="relative inline-flex items-center text-sm lg:text-[15px] rounded-s-md font-medium text-black dark:text-slate-300 py-2.5 px-4 xl:px-5 transform hover:scale-105 active:scale-100
+          hover:text-yellow-700 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-yellow-700 hover:after:w-full after:transition-all after:duration-300"
           href={{
             pathname: item.href || undefined,
           }}>
           {item.name}
-          {item.type && (
-            <ChevronDownIcon
-              className="ml-1 -mr-1 h-4 w-4 text-slate-600"
-              aria-hidden="true"
-            />
-          )}
         </Link>
       </div>
     );
   };
+
+  if (!isMounted) {
+    return null; // Return null during server-side rendering to avoid mismatch
+  }
 
   switch (menuItem.type) {
     case "dropdown":

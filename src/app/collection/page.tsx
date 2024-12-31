@@ -1,3 +1,5 @@
+"use client"
+
 import React, { FC } from "react";
 import SectionSliderCollections from "@/components/SectionSliderLargeProduct";
 import SectionPromo1 from "@/components/SectionPromo1";
@@ -7,8 +9,11 @@ import SidebarFilters from "@/components/SidebarFilters";
 import TabFilters from "@/components/TabFilters";
 import imageRightPng from "@/images/hero-right-banner-1.jpg";
 import Image from "next/image";
+import { UserState } from "@/UserContext";
 
-const PageCollection = ({}) => {
+const PageCollection = ({ }) => {
+
+  const { filterProduct } = UserState();
   return (
     <div className={`nc-PageCollection`}>
       <div className="container py-10 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">
@@ -42,7 +47,7 @@ const PageCollection = ({}) => {
               <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mx-4 border-t lg:border-t-0"></div>
               <div className="flex-1 ">
                 <div className="flex-1 grid grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-4 lg:gap-x-8 lg:gap-y-10 ">
-                  {PRODUCTS.map((item, index) => (
+                  {filterProduct.map((item, index) => (
                     <ProductCard data={item} key={index} />
                   ))}
                 </div>

@@ -9,6 +9,7 @@ import SiteHeader from "@/app/SiteHeader";
 import CommonClient from "./CommonClient";
 import { ReactQueryProvider } from "@/providers/reactQueryProvider";
 import { ReactReduxProvider } from "@/providers/reactReduxProvider";
+import UserContext from "@/UserContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,12 +28,14 @@ export default function RootLayout({
     <html lang="en" dir="" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
         <ReactReduxProvider>
+          {/* <UserContext> */}
           <ReactQueryProvider>
             <SiteHeader />
             {children}
             <CommonClient />
             <Footer />
           </ReactQueryProvider>
+          {/* </UserContext> */}
         </ReactReduxProvider>
       </body>
     </html>

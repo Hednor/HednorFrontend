@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "@/shared/Checkbox/Checkbox";
 import Slider from "rc-slider";
 import Radio from "@/shared/Radio/Radio";
 import MySwitch from "@/components/MySwitch";
+import { UserState } from "@/UserContext";
 
 // DEMO DATA
 const DATA_categories = [
@@ -55,15 +56,48 @@ const DATA_sortOrderRadios = [
 const PRICE_RANGE = [1, 500];
 //
 const SidebarFilters = () => {
-  //
-  const [isOnSale, setIsIsOnSale] = useState(true);
-  const [rangePrices, setRangePrices] = useState([100, 500]);
-  const [categoriesState, setCategoriesState] = useState<string[]>([]);
-  const [colorsState, setColorsState] = useState<string[]>([]);
-  const [sizesState, setSizesState] = useState<string[]>([]);
-  const [sortOrderStates, setSortOrderStates] = useState<string>("");
 
-  //
+  // const [isOnSale, setIsIsOnSale] = useState(true);
+  // const [rangePrices, setRangePrices] = useState([100, 500]);
+  // const [categoriesState, setCategoriesState] = useState<string[]>([]);
+  // const [colorsState, setColorsState] = useState<string[]>([]);
+  // const [sizesState, setSizesState] = useState<string[]>([]);
+  // const [sortOrderStates, setSortOrderStates] = useState<string>("");
+
+
+  //====================== Deepak code Come here=================================
+
+  const { isOnSale,
+    setIsIsOnSale,
+    rangePrices,
+    setRangePrices,
+    categoriesState,
+    setCategoriesState,
+    colorsState,
+    setColorsState,
+    sizesState,
+    setSizesState,
+    sortOrderStates,
+    setSortOrderStates } = UserState();
+
+
+
+
+  console.log(`rangePrices,
+    categoriesState,
+    colorsState,
+    sizesState,
+    sortOrderStates`,
+    rangePrices,
+    categoriesState,
+    colorsState,
+    sizesState,
+    sortOrderStates)
+
+  //====================== Deepak code End here=================================
+
+
+
   const handleChangeCategories = (checked: boolean, name: string) => {
     checked
       ? setCategoriesState([...categoriesState, name])
@@ -232,6 +266,8 @@ const SidebarFilters = () => {
       </div>
     );
   };
+
+
 
   return (
     <div className="divide-y divide-slate-200 dark:divide-slate-700">

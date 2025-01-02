@@ -44,15 +44,60 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   };
 
   // ===================== MENU MEGAMENU =====================
+  // const renderMegaMenu = (menu: NavItemType) => {
+  //   if (!menu.children) {
+  //     return null;
+  //   }
+  //   return (
+  //     <div
+  //       className={`menu-item flex-shrink-0 menu-megamenu menu-megamenu--large`}>
+  //       {renderMainItem(menu)}
+
+  //       <div className="invisible sub-menu absolute top-full inset-x-0 transform z-50">
+  //         <div className="bg-white dark:bg-neutral-900 shadow-lg">
+  //           <div className="container">
+  //             <div className="flex text-sm border-t border-slate-200 dark:border-slate-700 py-14">
+  //               <div className="flex-1 grid grid-cols-4 gap-6 xl:gap-8 pr-6 xl:pr-8">
+  //                 {menu.children.map((item, index) => (
+  //                   <div key={index}>
+  //                     <p className="font-semibold text-md text-slate-900 dark:text-neutral-200">
+  //                       {item.name}
+  //                     </p>
+  //                     <ul className="grid space-y-4 mt-4">
+  //                       {item.children?.map(renderMegaMenuNavlink)}
+  //                     </ul>
+  //                   </div>
+  //                 ))}
+  //               </div>
+
+  //               {menu?.poster?.map((item, index) => (
+  //                 <div key={index} className="w-[40%] xl:w-[35%]">
+  //                   <NavPoster item={item} />
+  //                 </div>
+  //               ))}
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
   const renderMegaMenu = (menu: NavItemType) => {
     if (!menu.children) {
       return null;
     }
+  
+    const isHover = menuCurrentHovers.includes(menu.id); // Check if the menu is active
     return (
       <div
-        className={`menu-item flex-shrink-0 menu-megamenu menu-megamenu--large`}>
+        className={`menu-item flex-shrink-0 menu-megamenu menu-megamenu--large ${
+          isHover ? "active-menu" : ""
+        }`}
+        onMouseEnter={() => onMouseEnterMenu(menu.id)}
+        onMouseLeave={() => onMouseLeaveMenu(menu.id)}
+      >
         {renderMainItem(menu)}
-
+  
         <div className="invisible sub-menu absolute top-full inset-x-0 transform z-50">
           <div className="bg-white dark:bg-neutral-900 shadow-lg">
             <div className="container">
@@ -69,7 +114,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
                     </div>
                   ))}
                 </div>
-
+  
                 {menu?.poster?.map((item, index) => (
                   <div key={index} className="w-[40%] xl:w-[35%]">
                     <NavPoster item={item} />
@@ -82,6 +127,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
       </div>
     );
   };
+  
 
   const renderMegaMenuNavlink = (item: NavItemType) => {
     return (
@@ -210,20 +256,42 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   };
 
   // ===================== MENU MAIN MENU =====================
+  // const renderMainItem = (item: NavItemType) => {
+  //   return (
+  //     <div className="h-12 flex-shrink-0 flex items-center">
+  //       <Link
+  //         className="relative inline-flex items-center text-sm lg:text-[15px] rounded-s-md font-medium text-black dark:text-slate-300 py-2.5 px-4 xl:px-5 transform hover:scale-105 active:scale-100
+  //         hover:text-yellow-700 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-yellow-700 hover:after:w-full after:transition-all after:duration-300"
+  //         href={{
+  //           pathname: item.href || undefined,
+  //         }}>
+  //         {item.name}
+  //       </Link>
+  //     </div>
+  //   );
+  // };
   const renderMainItem = (item: NavItemType) => {
+    const isActive = menuCurrentHovers.includes(item.id); // Check if the item is active
     return (
       <div className="h-12 flex-shrink-0 flex items-center">
         <Link
-          className="relative inline-flex items-center text-sm lg:text-[15px] rounded-s-md font-medium text-black dark:text-slate-300 py-2.5 px-4 xl:px-5 transform hover:scale-105 active:scale-100
-          hover:text-yellow-700 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-yellow-700 hover:after:w-full after:transition-all after:duration-300"
+          className={`relative inline-flex items-center text-sm lg:text-[15px] rounded-s-md font-medium text-black dark:text-slate-300 py-2.5 px-4 xl:px-5 transform hover:scale-105
+             active:scale-100 hover:text-yellow-700 after:absolute after:bottom-[-3px] after:left-0 after:w-0 after:h-[3px] after:bg-yellow-700 hover:after:w-full
+              after:transition-all after:duration-300 ${
+            isActive ? "after:w-full text-yellow-700" : ""
+          }`}
           href={{
             pathname: item.href || undefined,
-          }}>
+          }}
+        >
           {item.name}
         </Link>
       </div>
     );
   };
+
+ 
+  
 
   if (!isMounted) {
     return null; // Return null during server-side rendering to avoid mismatch

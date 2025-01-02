@@ -61,11 +61,7 @@ const Navigation = () => {
       {NAVIGATION_DEMO_2.map((item, index) => (
         <li
           key={item.id}
-          className={`cursor-pointer transition-colors duration-300 flex items-center justify-center ${
-            activeIndex === index
-              ? "text-yellow-800 border-b-4 border-yellow-800"
-              : "text-white"
-          }`} // Active items have a different color and underline
+         
           onClick={() => handleClick(index)} // Handle click event
         >
           <NavigationItem menuItem={item} />

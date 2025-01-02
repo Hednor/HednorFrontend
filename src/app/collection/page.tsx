@@ -9,11 +9,16 @@ import SidebarFilters from "@/components/SidebarFilters";
 import TabFilters from "@/components/TabFilters";
 import imageRightPng from "@/images/hero-right-banner-1.jpg";
 import Image from "next/image";
-import { UserState } from "@/UserContext";
+import { useFilterStore } from "@/store/Products";
 
 const PageCollection = ({ }) => {
 
-  const { filterProduct } = UserState();
+  // const { filterProduct } = UserState();
+
+  const filterProduct = useFilterStore((state) => state.filterProduct);
+
+
+  console.log(`this is Product`, filterProduct)
   return (
     <div className={`nc-PageCollection`}>
       <div className="container py-10 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">

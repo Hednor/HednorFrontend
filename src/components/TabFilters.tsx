@@ -13,6 +13,7 @@ import {
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import MySwitch from "@/components/MySwitch";
+import { useFilterStore } from "@/store/Products";
 
 // DEMO DATA
 const DATA_categories = [
@@ -72,13 +73,43 @@ const PRICE_RANGE = [1, 500];
 const TabFilters = () => {
   const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
   //
-  const [isOnSale, setIsIsOnSale] = useState(false);
-  const [rangePrices, setRangePrices] = useState([100, 500]);
-  const [categoriesState, setCategoriesState] = useState<string[]>([]);
-  const [colorsState, setColorsState] = useState<string[]>([]);
-  const [sizesState, setSizesState] = useState<string[]>([]);
-  const [sortOrderStates, setSortOrderStates] =
-    useState<string>("Most-Popular");
+  // const [isOnSale, setIsIsOnSale] = useState(false);
+  // const [rangePrices, setRangePrices] = useState([100, 500]);
+  // const [categoriesState, setCategoriesState] = useState<string[]>([]);
+  // const [colorsState, setColorsState] = useState<string[]>([]);
+  // const [sizesState, setSizesState] = useState<string[]>([]);
+  // const [sortOrderStates, setSortOrderStates] = useState<string>("Most-Popular");
+
+
+  // ==============================Deepak Filter code Start Her ZUstain============================== 
+
+  const isOnSale = useFilterStore((state) => state.isOnSale);
+  const rangePrices = useFilterStore((state) => state.rangePrices);
+  const categoriesState = useFilterStore((state) => state.categoriesState);
+  const colorsState = useFilterStore((state) => state.colorsState);
+  const sizesState = useFilterStore((state) => state.sizesState);
+  const sortOrderStates = useFilterStore((state) => state.sortOrderStates);
+  const filterProduct = useFilterStore((state) => state.filterProduct);
+
+
+  const setIsOnSale = useFilterStore((state) => state.setIsOnSale);
+  const setRangePrices = useFilterStore((state) => state.setRangePrices);
+  const setCategoriesState = useFilterStore((state) => state.setCategoriesState);
+  const setColorsState = useFilterStore((state) => state.setColorsState);
+  const setSizesState = useFilterStore((state) => state.setSizesState);
+  const setSortOrderStates = useFilterStore((state) => state.setSortOrderStates);
+  const filterData = useFilterStore((state) => state.filterData);
+
+
+
+
+  console.log(`this is Range Price`, rangePrices)
+
+
+
+
+  // ==============================Deepak Filter code End Her============================== 
+
 
   const closeModalMoreFilter = () => setisOpenMoreFilter(false);
   const openModalMoreFilter = () => setisOpenMoreFilter(true);
@@ -111,10 +142,9 @@ const TabFilters = () => {
             <Popover.Button
               className={`flex items-center justify-center px-4 py-2 text-sm border rounded-full focus:outline-none select-none
               ${open ? "!border-slate-500 " : ""}
-                ${
-                  !!sortOrderStates.length
-                    ? "!border-slate-500 bg-neutral-50 text-primary-900"
-                    : "border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-neutral-400 dark:hover:border-neutral-500"
+                ${!!sortOrderStates.length
+                  ? "!border-slate-500 bg-neutral-50 text-primary-900"
+                  : "border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-neutral-400 dark:hover:border-neutral-500"
                 }
                 `}>
               <svg
@@ -416,7 +446,7 @@ const TabFilters = () => {
                             label="On sale!"
                             desc="Products currently on sale"
                             enabled={isOnSale}
-                            onChange={setIsIsOnSale}
+                            onChange={setIsOnSale}
                           />
                         </div>
                       </div>

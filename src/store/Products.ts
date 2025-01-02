@@ -1,14 +1,37 @@
 import { PRODUCTS } from '@/data/data';
-import {create} from 'zustand';
+import { create } from 'zustand';
+import {Product} from '@/data/data'
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  tags: string[];
-  sizes?: string[];
-}
+
+
+// interface ProductVariant {
+//   id: number;
+//   name: string;
+//   thumbnail: string;
+//   featuredImage: string;
+// }
+
+
+// interface Product {
+//   id: number;
+//   name: string;
+//   price: number;
+//   category: string;
+//   tags: string[];
+//   sizes?: string[];
+//   description?: string;
+//   image: string;
+//   link?: string;
+//   variants?: ProductVariant[]; 
+//   variantType?: string;
+//   allOfSizes?: string[];
+//   status?: string;
+//   rating?: string;
+//   numberOfReviews?: number;
+// }
+
+
+
 
 interface FilterState {
   isOnSale: boolean;
@@ -18,8 +41,9 @@ interface FilterState {
   sizesState: string[];
   sortOrderStates: string;
   filterProduct: Product[];
+
   setIsOnSale: (value: boolean) => void;
-  setRangePrices: (value: number[]) => void;
+  setRangePrices: (value:  number[]) => void;
   setCategoriesState: (value: string[]) => void;
   setColorsState: (value: string[]) => void;
   setSizesState: (value: string[]) => void;
@@ -29,56 +53,63 @@ interface FilterState {
 
 export const useFilterStore = create<FilterState>((set) => ({
   isOnSale: true,
-  rangePrices: [0, 200],
+  rangePrices: [0, 250],
   categoriesState: [],
   colorsState: [],
   sizesState: [],
   sortOrderStates: '',
   filterProduct: PRODUCTS,
-  setIsOnSale: (value:boolean) => set({ isOnSale: value }),
-  setRangePrices: (value:number[]) => set({ rangePrices: value }),
-  setCategoriesState: (value:string[]) => set({ categoriesState: value }),
-  setColorsState: (value:string[]) => set({ colorsState: value }),
-  setSizesState: (value:string[]) => set({ sizesState: value }),
-  setSortOrderStates: (value:any) => set({ sortOrderStates: value }),
-  filterData: () => set((state:any) => {
-    let filtered = PRODUCTS;
 
-    // Filter by price range
-    filtered = filtered.filter(item =>
-      item.price >= state.rangePrices[0] && item.price <= state.rangePrices[1]
-    );
+  setIsOnSale: (value: boolean) => set({ isOnSale: value }),
+  setRangePrices: (value: number[]) => set({ rangePrices: value }),
+  setCategoriesState: (value: string[]) => set({ categoriesState: value }),
+  setColorsState: (value: string[]) => set({ colorsState: value }),
+  setSizesState: (value: string[]) => set({ sizesState: value }),
+  setSortOrderStates: (value: string) => set({ sortOrderStates: value }),
 
-    // Filter by categories
-    if (state.categoriesState.length > 0) {
-      filtered = filtered.filter(item =>
-        state.categoriesState.includes(item.category)
+  filterData: () =>
+    set((state) => {
+      let filtered = PRODUCTS;
+
+      // Filter by price range
+      filtered = filtered.filter(
+        (item) =>
+          item.price >= state.rangePrices[0] &&
+          item.price <= state.rangePrices[1]
       );
-    }
 
-    // Filter by colors
-    if (state.colorsState.length > 0) {
-      filtered = filtered.filter(item =>
-        item.tags.some(tag => state.colorsState.includes(tag))
-      );
-    }
-
-    // Filter by sizes
-    if (state.sizesState.length > 0) {
-  filtered = filtered.filter(item =>
-    Array.isArray(item.sizes) && item.sizes.some(size => state.sizesState.includes(size))
-  );
-}
-
-    // Sort by selected order
-    if (state.sortOrderStates) {
-      if (state.sortOrderStates === 'price-asc') {
-        filtered = filtered.sort((a, b) => a.price - b.price);
-      } else if (state.sortOrderStates === 'price-desc') {
-        filtered = filtered.sort((a, b) => b.price - a.price);
+      // Filter by categories
+      if (state.categoriesState.length > 0) {
+        filtered = filtered.filter((item) =>
+          state.categoriesState.includes(item.category)
+        );
       }
-    }
 
-    return { filterProduct: filtered };
-  }),
+      // Filter by colors (tags)
+      if (state.colorsState.length > 0) {
+        filtered = filtered.filter((item) =>
+          item.tags.some((tag) => state.colorsState.includes(tag))
+        );
+      }
+
+      // Filter by sizes
+      if (state.sizesState.length > 0) {
+        filtered = filtered.filter(
+          (item) =>
+            Array.isArray(item.sizes) &&
+            item.sizes.some((size) => state.sizesState.includes(size))
+        );
+      }
+
+      // Sort by selected order
+      if (state.sortOrderStates) {
+        if (state.sortOrderStates === 'price-asc') {
+          filtered = filtered.sort((a, b) => a.price - b.price);
+        } else if (state.sortOrderStates === 'price-desc') {
+          filtered = filtered.sort((a, b) => b.price - a.price);
+        }
+      }
+
+      return { filterProduct: filtered };
+    }),
 }));

@@ -5,7 +5,8 @@ import Checkbox from "@/shared/Checkbox/Checkbox";
 import Slider from "rc-slider";
 import Radio from "@/shared/Radio/Radio";
 import MySwitch from "@/components/MySwitch";
-import { UserState } from "@/UserContext";
+import { useFilterStore } from "@/store/Products";
+// import { UserState } from "@/UserContext";
 
 // DEMO DATA
 const DATA_categories = [
@@ -67,20 +68,47 @@ const SidebarFilters = () => {
 
   //====================== Deepak code Come here=================================
 
-  const { isOnSale,
-    setIsIsOnSale,
+  // const { isOnSale,
+  //   setIsIsOnSale,
+  //   rangePrices,
+  //   setRangePrices,
+  //   categoriesState,
+  //   setCategoriesState,
+  //   colorsState,
+  //   setColorsState,
+  //   sizesState,
+  //   setSizesState,
+  //   sortOrderStates,
+  //   setSortOrderStates } = UserState();
+
+  const isOnSale = useFilterStore((state) => state.isOnSale);
+  const rangePrices = useFilterStore((state) => state.rangePrices);
+  const categoriesState = useFilterStore((state) => state.categoriesState);
+  const colorsState = useFilterStore((state) => state.colorsState);
+  const sizesState = useFilterStore((state) => state.sizesState);
+  const sortOrderStates = useFilterStore((state) => state.sortOrderStates);
+  const filterProduct = useFilterStore((state) => state.filterProduct);
+
+
+  const setIsOnSale = useFilterStore((state) => state.setIsOnSale);
+  const setRangePrices = useFilterStore((state) => state.setRangePrices);
+  const setCategoriesState = useFilterStore((state) => state.setCategoriesState);
+  const setColorsState = useFilterStore((state) => state.setColorsState);
+  const setSizesState = useFilterStore((state) => state.setSizesState);
+  const setSortOrderStates = useFilterStore((state) => state.setSortOrderStates);
+  const filterData = useFilterStore((state) => state.filterData);
+
+  useEffect(() => {
+    filterData();
+  }, [
+    isOnSale,
     rangePrices,
-    setRangePrices,
     categoriesState,
-    setCategoriesState,
     colorsState,
-    setColorsState,
     sizesState,
-    setSizesState,
     sortOrderStates,
-    setSortOrderStates } = UserState();
-
-
+    filterData,
+  ]);
 
 
   console.log(`rangePrices,
@@ -280,7 +308,7 @@ const SidebarFilters = () => {
           label="On sale!"
           desc="Products currently on sale"
           enabled={isOnSale}
-          onChange={setIsIsOnSale}
+          onChange={setIsOnSale}
         />
       </div>
       {renderTabsSortOrder()}

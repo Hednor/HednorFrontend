@@ -120,7 +120,10 @@ const SidebarFilters = () => {
     categoriesState,
     colorsState,
     sizesState,
-    sortOrderStates)
+    sortOrderStates);
+
+
+  console.log(`this is sortby `, sortOrderStates);
 
   //====================== Deepak code End here=================================
 
@@ -275,25 +278,26 @@ const SidebarFilters = () => {
   };
 
   // OK
-  const renderTabsSortOrder = () => {
-    return (
-      <div className="relative flex flex-col py-8 space-y-4">
-        <h3 className="font-semibold mb-2.5">Sort order</h3>
-        {DATA_sortOrderRadios.map((item) => (
-          <Radio
-            id={item.id}
-            key={item.id}
-            name="radioNameSort"
-            label={item.name}
-            defaultChecked={sortOrderStates === item.id}
-            sizeClassName="w-5 h-5"
-            onChange={setSortOrderStates}
-            className="!text-sm"
-          />
-        ))}
-      </div>
-    );
-  };
+
+  // const renderTabsSortOrder = () => {
+  //   return (
+  //     <div className="relative flex flex-col py-8 space-y-4">
+  //       <h3 className="font-semibold mb-2.5">Sort order</h3>
+  //       {DATA_sortOrderRadios.map((item) => (
+  //         <Radio
+  //           id={item.id}
+  //           key={item.id}
+  //           name="radioNameSort"
+  //           label={item.name}
+  //           defaultChecked={sortOrderStates === item.id}
+  //           sizeClassName="w-5 h-5"
+  //           onChange={setSortOrderStates}
+  //           className="!text-sm"
+  //         />
+  //       ))}
+  //     </div>
+  //   );
+  // };
 
 
 
@@ -311,7 +315,7 @@ const SidebarFilters = () => {
           onChange={setIsOnSale}
         />
       </div>
-      {renderTabsSortOrder()}
+      {/* {renderTabsSortOrder()} */}
     </div>
   );
 };

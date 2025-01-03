@@ -38,7 +38,7 @@ export interface Product {
   variantType?: "color" | "image";
   sizes?: string[];
   allOfSizes?: string[];
-  status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+  status?: "Most Popular" | "Newest";
   rating?: string;
   numberOfReviews?: number;
 }
@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
     variantType: "image",
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    status: "New in",
+    status: "Newest",
     rating: "4.4",
     numberOfReviews: 98,
   },
@@ -137,7 +137,7 @@ export const PRODUCTS: Product[] = [
     link: "/product-detail/",
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
-    status: "50% Discount",
+    status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -155,6 +155,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     allOfSizes: ["S", "M", "L", "XL", "2XL", "3XL"],
     rating: "4.9",
+    status:"Newest",
     numberOfReviews: 98,
   },
   {
@@ -168,7 +169,7 @@ export const PRODUCTS: Product[] = [
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
     link: "/product-detail/",
-    status: "Sold Out",
+    status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -186,6 +187,7 @@ export const PRODUCTS: Product[] = [
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     link: "/product-detail/",
     rating: "4.9",
+    status:"Newest",
     numberOfReviews: 98,
   },
   {
@@ -200,6 +202,7 @@ export const PRODUCTS: Product[] = [
     variants: DEMO_VARIANT_COLORS,
     link: "/product-detail/",
     rating: "4.9",
+    status:"Newest",
     numberOfReviews: 98,
   },
   {
@@ -213,7 +216,7 @@ export const PRODUCTS: Product[] = [
     variants: DEMO_VARIANTS,
     variantType: "image",
     link: "/product-detail/",
-    status: "New in",
+    status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -230,7 +233,7 @@ export const PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     link: "/product-detail/",
-    status: "limited edition",
+    status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -250,7 +253,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variantType: "color",
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    status: "New in",
+ status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -265,7 +268,7 @@ export const SPORT_PRODUCTS: Product[] = [
     link: "/product-detail/",
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
-    status: "50% Discount",
+    status: "Newest",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -283,6 +286,7 @@ export const SPORT_PRODUCTS: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     allOfSizes: ["S", "M", "L", "XL", "2XL", "3XL"],
     rating: "4.9",
+     status: "Most Popular",
     numberOfReviews: 98,
   },
   {
@@ -296,7 +300,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variants: DEMO_VARIANT_COLORS,
     variantType: "color",
     link: "/product-detail/",
-    status: "Sold Out",
+   status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -341,7 +345,7 @@ export const SPORT_PRODUCTS: Product[] = [
     variants: DEMO_VARIANTS,
     variantType: "image",
     link: "/product-detail/",
-    status: "New in",
+  status: "Newest",
     rating: "4.9",
     numberOfReviews: 98,
   },
@@ -358,7 +362,7 @@ export const SPORT_PRODUCTS: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     allOfSizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     link: "/product-detail/",
-    status: "limited edition",
+     status: "Most Popular",
     rating: "4.9",
     numberOfReviews: 98,
   },

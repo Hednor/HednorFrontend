@@ -1,15 +1,16 @@
 "use client"
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import SectionSliderCollections from "@/components/SectionSliderLargeProduct";
 import SectionPromo1 from "@/components/SectionPromo1";
 import ProductCard from "@/components/ProductCard";
-import { PRODUCTS } from "@/data/data";
+import { PRODUCTS, SPORT_PRODUCTS } from "@/data/data";
 import SidebarFilters from "@/components/SidebarFilters";
 import TabFilters from "@/components/TabFilters";
 import imageRightPng from "@/images/hero-right-banner-1.jpg";
 import Image from "next/image";
 import { useFilterStore } from "@/store/Products";
+import PaginationSection from "@/components/PaginationSection/PaginationSection";
 
 const PageCollection = ({ }) => {
 
@@ -18,7 +19,35 @@ const PageCollection = ({ }) => {
   const filterProduct = useFilterStore((state) => state.filterProduct);
 
 
-  console.log(`this is Product`, filterProduct)
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const productsPerPage = 9;
+
+  // Calculate the current products to display
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filterProduct.concat(SPORT_PRODUCTS).slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+
+
+  const totalPages = Math.ceil(filterProduct.concat(SPORT_PRODUCTS).length / productsPerPage);
+
+
+  console.log(`This is Total Products`, totalPages);
+
+  // Handle pagination
+  const handlePageChange = (page: number): void => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+
+  console.log(`this is Product`, filterProduct.concat(SPORT_PRODUCTS))
   return (
     <div className={`nc-PageCollection`}>
       <div className="container py-10 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">
@@ -52,9 +81,16 @@ const PageCollection = ({ }) => {
               <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mx-4 border-t lg:border-t-0"></div>
               <div className="flex-1 ">
                 <div className="flex-1 grid grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-4 lg:gap-x-8 lg:gap-y-10 ">
-                  {filterProduct.map((item, index) => (
+                  {currentProducts.map((item, index) => (
                     <ProductCard data={item} key={index} />
                   ))}
+                </div>
+                <div className="w-full ">
+                  <PaginationSection
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </div>
               </div>
             </div>

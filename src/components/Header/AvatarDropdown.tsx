@@ -18,27 +18,25 @@ export default function AvatarDropdown() {
               onClick={() => setIsOpen(!open)}
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
-              className={`rounded-full flex-col text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-16 sm:h-16 focus:outline-none flex items-center justify-center ${
+              className={`rounded-full text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-12 sm:h-12 focus:outline-none flex items-center justify-center ${
                 isOpen && "text-blue-500"
               }`}>
-              <div className="h-1">
+              <div className="flex flex-col items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6">
+                  className="w-6 h-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
                   />
                 </svg>
+                <p className="text-xs font-medium mt-1">Profile</p>
               </div>
-
-              <br />
-              <p className="text-xs font-medium">Profile</p>
             </Popover.Button>
 
             <Transition
@@ -57,18 +55,19 @@ export default function AvatarDropdown() {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
-                      {/* <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" /> */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-12">
-                        <path
-                          fill-rule="evenodd"
-                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
+                      <div className="h-8 w-8 rounded-full bg-primary-500 text-white flex items-center justify-center">
+                        <svg 
+                          className="w-5 h-5" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </div>
 
                       <div className="flex-grow">
                         <h4 className="font-semibold">Owais S</h4>

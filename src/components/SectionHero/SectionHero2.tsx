@@ -292,25 +292,25 @@ const SectionHero2: FC<SectionHero2Props> = ({ className = "" }) => {
 
         <Prev
           className="absolute start-1 sm:start-5 top-3/4 sm:top-1/2 sm:-translate-y-1/2 z-10 !text-slate-700"
-          btnClassName="w-12 h-12 hover:border-slate-400 dark:hover:border-slate-400"
+          btnClassName="w-12 h-12"
           svgSize="w-6 h-6"
           onClickPrev={handleClickPrev}
         />
         <Next
           className="absolute end-1 sm:end-5 top-3/4 sm:top-1/2 sm:-translate-y-1/2 z-10 !text-slate-700"
-          btnClassName="w-12 h-12 hover:border-slate-400 dark:hover:border-slate-400"
+          btnClassName="w-12 h-12"
           svgSize="w-6 h-6"
           onClickNext={handleClickNext}
         />
 
         {/* BG */}
 
-        <div className="relative w-full h-60 sm:h-[600px]">
+        <div className="relative w-full h-60 sm:h-[80vh]">
           <div className=" h-full w-full">
             <Image
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="w-full h-full object-fill"
+              className="w-full h-full object-center"
               src={item.image}
               alt={item.heading}
               priority

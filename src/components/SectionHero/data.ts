@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from "next/image";
 import { Route } from "@/routers/types";
-import imageRightPng from "@/images/hero-right-banner-1.jpg";
-import imageRightPng2 from "@/images/hero-right-banner-2.jpg";
-import imageRightPng3 from "@/images/hero-right-banner-3.jpg";
+import imageRightPng from "@/images/hero-right-banner-5.jpg";
+import imageRightPng2 from "@/images/hero-right-banner-6.jpg";
+import imageRightPng3 from "@/images/hero-right-banner-7.jpg";
 
 interface Hero2DataType {
   image: StaticImageData | string;

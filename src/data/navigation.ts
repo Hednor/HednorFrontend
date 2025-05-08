@@ -51,7 +51,7 @@ export const MEGAMENU_TEMPLATES: NavItemType[] = [
       { id: ncNanoId(), href: "/contact", name: "Contact Page" },
       { id: ncNanoId(), href: "/login", name: "Login" },
       { id: ncNanoId(), href: "/signup", name: "Signup" },
-      { id: ncNanoId(), href: "/forgot-pass", name: "Forgot Password" },
+      { id: ncNanoId(), href: "/forgot-password", name: "Forgot Password" },
     ],
   },
 ];
@@ -186,12 +186,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Home Demo 1",
-  },
-  {
-    id: ncNanoId(),
-    href: "/home-2",
-    name: "Home Demo 2",
+    name: "Home",
   },
   {
     id: ncNanoId(),
@@ -275,7 +270,7 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
         href: "/subscription",
         name: "Subscription",
       },
-      { id: ncNanoId(), href: "/forgot-pass", name: "Forgot Password" },
+      { id: ncNanoId(), href: "/forgot-password", name: "Forgot Password" },
     ],
   },
   {
@@ -344,13 +339,13 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     href: "/collection",
     name: "Sport",
   },
-  {
-    id: ncNanoId(),
-    href: "/collection",
-    name: "Templates",
-    type: "megaMenu",
-    children: MEGAMENU_TEMPLATES,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/collection",
+  //   name: "Templates",
+  //   type: "megaMenu",
+  //   children: MEGAMENU_TEMPLATES,
+  // },
   {
     id: ncNanoId(),
     href: "/search",

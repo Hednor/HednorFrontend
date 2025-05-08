@@ -5,17 +5,17 @@ import Link from "next/link";
 
 const PageForgotPass = ({}) => {
   return (
-    <div className="container mb-24 lg:mb-32">
-      <header className="text-center max-w-2xl mx-auto - mb-14 sm:mb-16 lg:mb-20">
-        <h2 className="mt-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
+    <div className="container max-w-md  p-10 my-10 lg:my-10 rounded-3xl sm:border-2 sm:border-primary-500">
+      <header className="text-center max-w-2xl mx-auto mb-10">
+        <h2 className="mb-8 flex items-center text-2xl leading-[115%] md:text-3xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
           Forgot password
         </h2>
-        <span className="block text-sm mt-4 text-neutral-700 sm:text-base dark:text-neutral-200">
-          Welcome to our Community
+        <span className="block text-sm text-red-400 sm:text-base bg-primary-50 rounded-lg p-3">
+          *** Enter your register email ***
         </span>
       </header>
 
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="mx-auto space-y-6">
         {/* FORM */}
         <form className="grid grid-cols-1 gap-6" action="#" method="post">
           <label className="block">
@@ -34,11 +34,11 @@ const PageForgotPass = ({}) => {
         {/* ==== */}
         <span className="block text-center text-neutral-700 dark:text-neutral-300">
           Go back for {` `}
-          <Link href="/login" className="text-green-600">
+          <Link href="/login" className="text-primary-500 font-semibold">
             Sign in
           </Link>
           {` / `}
-          <Link href="/signup" className="text-green-600">
+          <Link href="/signup" className="text-primary-500 font-semibold">
             Sign up
           </Link>
         </span>

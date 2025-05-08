@@ -16,9 +16,71 @@ export default function AvatarDropdown() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="AvatarDropdown ">
+      <Popover className="relative">
+        {({ open, close }) => (
+          <>
+            <Popover.Button
+              onClick={() => setIsOpen(!open)}
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+              className={`rounded-full text-slate-700 dark:text-slate-300 w-10 h-10 sm:w-12 sm:h-12 focus:outline-none flex items-center justify-center ${
+                isOpen && "text-blue-500"
+              }`}>
+              <div className="flex flex-col items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  />
+                </svg>
+                <p className="text-xs font-medium mt-1">Profile</p>
+              </div>
+            </Popover.Button>
+
+            <Transition
+              as={Fragment}
+              show={isOpen}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 translate-y-1"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 translate-y-1">
+              <Popover.Panel
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                className="absolute z-10 w-screen max-w-[260px] px-4 mt-3.5 -right-14 sm:-right-12 sm:px-0">
+                <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
+                    <div className="flex items-center space-x-3">
+                      <div className="h-8 w-8 rounded-full bg-primary-500 text-white flex items-center justify-center">
+                        <svg 
+                          className="w-5 h-5" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </div>
+
   const { data, isLoading } = getCurrentUser();
   const token = useSelector((state: any) => state.auth.token);
   const [isMounted, setIsMounted] = useState(false);
+
 
   const handleLogout = () => {
     dispatch(logout());

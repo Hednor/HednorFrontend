@@ -1,4 +1,7 @@
-"use client";
+
+
+
+"use client"
 
 import Label from "@/components/Label/Label";
 import React, { useState } from "react";
@@ -7,6 +10,7 @@ import ButtonSecondary from "@/shared/Button/ButtonSecondary";
 import Input from "@/shared/Input/Input";
 import { avatarImgs } from "@/contains/fakeData";
 import Image from "next/image";
+
 import Select from "@/shared/Select/Select";
 import toast from "react-hot-toast";
 
@@ -86,6 +90,12 @@ const AccountPage = () => {
       setEditingAddressId(id);
     }
   };
+
+
+import getCurrentUser from "@/utils/api/user";
+
+const AccountPage = () => {
+  const { data, isLoading } = getCurrentUser();
 
   return (
     <div className="space-y-10 sm:space-y-12">
@@ -205,6 +215,19 @@ const AccountPage = () => {
                   <ButtonPrimary>Update Profile</ButtonPrimary>
                 </div>
               </div>
+
+
+              <input
+                type="file"
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+            </div>
+          </div>
+          <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
+            <div>
+              <Label>Full name</Label>
+              <Input className="mt-1.5" defaultValue={data?.displayName} />
+
             </div>
 
       {/* Address Book Section */}
@@ -223,6 +246,7 @@ const AccountPage = () => {
           </ButtonPrimary>
         </div>
 
+
         {isAddingAddress && (
           <div className="mb-6 p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
             <div className="space-y-4">
@@ -239,6 +263,19 @@ const AccountPage = () => {
                   <option value="Office">Office</option>
                   <option value="Other">Other</option>
                 </Select>
+
+            {/* ---- */}
+            <div>
+              <Label>Email</Label>
+              <div className="mt-1.5 flex">
+                <span className="inline-flex items-center px-2.5 rounded-l-2xl border border-r-0 border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 text-sm">
+                  <i className="text-2xl las la-envelope"></i>
+                </span>
+                <Input
+                  className="!rounded-l-none"
+                  placeholder={data?.email}
+                />
+
               </div>
               <div>
                 <Label>Address</Label>

@@ -1,5 +1,4 @@
 import React from "react";
-import SectionHowItWork from "@/components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
 import SectionPromo1 from "@/components/SectionPromo1";
 import SectionHero2 from "@/components/SectionHero/SectionHero2";
@@ -17,6 +16,7 @@ import { PRODUCTS, SPORT_PRODUCTS } from "@/data/data";
 import SectionGridFeatureItems from "@/components/SectionGridFeatureItems";
 import SectionMagazine5 from "@/app/blog/SectionMagazine5";
 import { Discount } from "@/components/Discount/Discount";
+import Link from "next/link";
 
 function PageHome() {
   return (
@@ -24,7 +24,7 @@ function PageHome() {
       <SectionHero2 />
       <Discount />
 
-      <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
+      <div className="container relative space-y-24 my-16 sm:my-24 lg:space-y-32 lg:my-32">
         <DiscoverMoreSlider />
 
         <SectionSliderProductCard
@@ -60,20 +60,15 @@ function PageHome() {
               The latest news
             </Heading>
             <SectionMagazine5 />
-            <div className="flex mt-16 justify-center">
-              <ButtonSecondary>Show all blog articles</ButtonSecondary>
-            </div>
+            <Link href={"/blog"} className="flex mt-16 justify-center">
+              <ButtonSecondary >Show all blog articles</ButtonSecondary>
+            </Link>
           </div>
         </div>
         <SectionPromo1 />
 
         <SectionPromo3 />
 
-        {/* <div className="py-24 lg:py-32 border-t border-b border-slate-200 dark:border-slate-700">
-          <SectionHowItWork />
-        </div>
-
-        <SectionClientSay /> */}
       </div>
     </div>
   );

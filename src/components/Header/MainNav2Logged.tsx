@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createRef, FC, useState } from "react";
+import React, { createRef, FC, useEffect, useState } from "react";
 import Logo from "@/shared/Logo/Logo";
 import MenuBar from "@/shared/MenuBar/MenuBar";
 import AvatarDropdown from "./AvatarDropdown";
@@ -9,7 +9,7 @@ import CartDropdown from "./CartDropdown";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
-export interface MainNav2LoggedProps {}
+export interface MainNav2LoggedProps { }
 
 const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
   const inputRef = createRef<HTMLInputElement>();
@@ -95,7 +95,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
             <h1 className="font-semibold">Refer</h1>
           </div>
         </div>
-        <div className="flex-1 flex gap-x-1 items-baseline  justify-end text-slate-700 dark:text-slate-100">
+        <div className="flex-1 flex gap-x-1  justify-end items-center text-slate-700 dark:text-slate-100">
           <AvatarDropdown />
           <CartDropdown />
         </div>

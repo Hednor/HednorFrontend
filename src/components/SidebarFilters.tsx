@@ -8,32 +8,29 @@ import MySwitch from "@/components/MySwitch";
 
 // DEMO DATA
 const DATA_categories = [
-  {
-    name: "Backpacks",
-  },
-  {
-    name: "Travel Bags",
-  },
-  {
-    name: "Laptop Sleeves",
-  },
-  {
-    name: "Organization",
-  },
-  {
-    name: "Accessories",
-  },
+  { name: "Backpacks" },
+  { name: "Shorts" },
+  { name: "T-shirt" },
+  { name: "Party" },
+  { name: "Umbrellas" },
+  { name: "Accessories" },
+  { name: "Winter" },
+  { name: "Summer" },
 ];
+
 
 const DATA_colors = [
   { name: "White" },
-  { name: "Beige" },
+  { name: "Red" },
   { name: "Blue" },
   { name: "Black" },
   { name: "Brown" },
   { name: "Green" },
-  { name: "Navy" },
+  { name: "Navy Blue" },
+  { name: "Pink" },
+  { name: "Violet" },
 ];
+
 
 const DATA_sizes = [
   { name: "XS" },

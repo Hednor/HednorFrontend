@@ -3,6 +3,7 @@ import facebook from "@/images/socials/facebook.svg";
 import twitter from "@/images/socials/twitter.svg";
 import telegram from "@/images/socials/telegram.svg";
 import youtube from "@/images/socials/youtube.svg";
+import instagram from "@/images/socials/instagram.svg";
 import Image from "next/image";
 
 export interface SocialsListProps {
@@ -12,9 +13,8 @@ export interface SocialsListProps {
 
 const socialsDemo = [
   { name: "Facebook", icon: facebook, href: "#" },
+  { name: "Instagram", icon: instagram, href: "#" },
   { name: "Twitter", icon: twitter, href: "#" },
-  { name: "Youtube", icon: youtube, href: "#" },
-  { name: "Telegram", icon: telegram, href: "#" },
 ];
 
 const SocialsList: FC<SocialsListProps> = ({
@@ -23,8 +23,7 @@ const SocialsList: FC<SocialsListProps> = ({
 }) => {
   return (
     <nav
-      className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-6000 dark:text-neutral-300 ${className}`}
-    >
+      className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-6000 dark:text-neutral-300 ${className}`}>
       {socialsDemo.map((item, i) => (
         <a
           key={i}
@@ -32,8 +31,7 @@ const SocialsList: FC<SocialsListProps> = ({
           href={item.href}
           target="_blank"
           rel="noopener noreferrer"
-          title={item.name}
-        >
+          title={item.name}>
           <Image sizes="40px" src={item.icon} alt="" />
         </a>
       ))}
